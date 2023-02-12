@@ -28,8 +28,12 @@ function startQuiz() {
   showQuestions();
 }
 
-//when the "start" button is clicked, the quiz starts
-start.addEventListener("click", startQuiz);
+//a function that displays the final score
+function showScore() {
+  questionsBlock.style.display = "none";
+  feedback.style.display = "none";
+  document.getElementById("end-screen").style.display = "block";
+}
 
 //a function that checks user answer, updates the score, and shows the next question
 // triggered by onclick on the buttons that display the answers
@@ -43,6 +47,11 @@ function check(answer) {
   }
   if (questionIndex < questions.length - 1) {
     questionIndex++;
-    showQuestions();
+    showQuestions(); //shows next question
+  } else {
+    showScore(); //shows the final score
   }
 }
+
+//when the "start" button is clicked, the quiz starts
+start.addEventListener("click", startQuiz);
