@@ -7,9 +7,10 @@ let answer2 = document.getElementById("two");
 let answer3 = document.getElementById("three");
 let answer4 = document.getElementById("four");
 let feedback = document.getElementById("feedback");
+let timeElement = document.getElementById("time");
 
 let questionIndex = 0;
-let score = 0;
+let timeLeft = 60;
 
 //a function that shows questions and answers
 function showQuestions() {
@@ -21,18 +22,30 @@ function showQuestions() {
   answer4.innerHTML = q.answer4;
 }
 
-//a function that hides the start screen and shows questions and answers
-function startQuiz() {
-  document.getElementById("start-screen").hidden = true; //hides the start screen
-  questionsBlock.style.display = "block"; //displays the div with the quiz
-  showQuestions();
-}
+//a function that shows time left
+let intervalTimer = setInterval(() => {
+  timeLeft -= 1;
+  timeElement.innerHTML = timeLeft.toString();
+  if (timeLeft <= 0) {
+    showScore();
+  }
+}, 1000);
 
 //a function that displays the final score
 function showScore() {
   questionsBlock.style.display = "none";
-  feedback.style.display = "none";
+  // feedback.style.display = "none";
   document.getElementById("end-screen").style.display = "block";
+  clearInterval(intervalTimer);
+  document.getElementById("final-score").innerHTML = timeLeft.toString();
+}
+
+//a function that hides the start screen and shows questions and answers
+function startQuiz() {
+  document.getElementById("start-screen").hidden = true; //hides the start screen
+  questionsBlock.style.display = "block"; //displays the div with the quiz
+  intervalTimer;
+  showQuestions();
 }
 
 //a function that checks user answer, updates the score, and shows the next question
@@ -40,11 +53,12 @@ function showScore() {
 function check(answer) {
   feedback.style.display = "block";
   if (questions[questionIndex].correct === answer) {
-    score++;
     feedback.innerHTML = "Correct!";
   } else {
     feedback.innerHTML = "Wrong!";
+    timeLeft -= 10;
   }
+
   if (questionIndex < questions.length - 1) {
     questionIndex++;
     showQuestions(); //shows next question
