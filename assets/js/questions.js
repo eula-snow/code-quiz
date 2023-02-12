@@ -33,7 +33,8 @@ var questions = [
     correct: "one",
   },
   {
-    question: `What is the correct way to select <h1 class = 'title'>Title</h1>using JavaScript?`,
+    question:
+      "What is the correct way to select \n<h1 class = 'title'>Title</h1> \nusing JavaScript?",
     answer1: "1. document.querySelector(h1)",
     answer2: "2. document.querySelector('#title')",
     answer3: "3. document.getElementById('title')",
