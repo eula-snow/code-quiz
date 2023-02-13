@@ -54,8 +54,12 @@ function check(answer) {
   feedback.style.display = "block";
   if (questions[questionIndex].correct === answer) {
     feedback.innerHTML = "Correct!";
+    let correctSound = new Audio("assets/sfx/correct.wav");
+    correctSound.play();
   } else {
     feedback.innerHTML = "Wrong!";
+    let incorrectSound = new Audio("assets/sfx/incorrect.wav");
+    incorrectSound.play();
     timeLeft -= 10;
   }
 
@@ -69,3 +73,18 @@ function check(answer) {
 
 //when the "start" button is clicked, the quiz starts
 start.addEventListener("click", startQuiz);
+
+//a function that saves user initials and score in local storage
+function addScore() {
+  let initials = document.getElementById("initials").value; //gets input value - user initials
+  let scoresStr = localStorage.getItem("userData"); //retrieves user initials and scores from local storage
+  let scoresArr = [];
+
+  if (scoresStr) {
+    //checks if there are any user initials and scores in the local storage
+    scoresArr = JSON.parse(scoresStr); //parses string from local storage into an array
+  }
+  scoresArr.push({ initials: initials, score: timeLeft }); //saves the latest user initials and score into an array
+  localStorage.setItem("userData", JSON.stringify(scoresArr)); //transforms array to string and saves it to local storage
+  window.location = "highscores.html"; //redirects to highscores.html
+}
