@@ -11,6 +11,7 @@ let timeElement = document.getElementById("time");
 
 let questionIndex = 0;
 let timeLeft = 60;
+let intervalTimer;
 
 //a function that shows questions and answers
 function showQuestions() {
@@ -23,13 +24,13 @@ function showQuestions() {
 }
 
 //a function that shows time left
-let intervalTimer = setInterval(() => {
-  timeLeft -= 1;
-  timeElement.innerHTML = timeLeft.toString();
-  if (timeLeft <= 0) {
-    showScore();
-  }
-}, 1000);
+// let intervalTimer = setInterval(() => {
+//   timeLeft -= 1;
+//   timeElement.innerHTML = timeLeft.toString();
+//   if (timeLeft <= 0) {
+//     showScore();
+//   }
+// }, 1000);
 
 //a function that displays the final score
 function showScore() {
@@ -44,7 +45,14 @@ function showScore() {
 function startQuiz() {
   document.getElementById("start-screen").hidden = true; //hides the start screen
   questionsBlock.style.display = "block"; //displays the div with the quiz
-  intervalTimer;
+  //a function that shows time left
+  intervalTimer = setInterval(() => {
+    timeLeft -= 1;
+    timeElement.innerHTML = timeLeft.toString();
+    if (timeLeft <= 0) {
+      showScore();
+    }
+  }, 1000);
   showQuestions();
 }
 
