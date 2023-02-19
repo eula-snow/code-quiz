@@ -3,7 +3,7 @@
 ## Description
 
 This is a webpage that allows users to test their JavaScript knowledge.
-[View](https://eula-snow.github.io/password-generator/)
+[View](https://eula-snow.github.io/code-quiz/)
 
 ## Installation
 
